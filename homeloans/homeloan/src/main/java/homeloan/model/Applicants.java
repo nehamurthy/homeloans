@@ -1,10 +1,15 @@
 package homeloan.model;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -15,11 +20,12 @@ import javax.persistence.TemporalType;
 public class Applicants {
 
 	@Id
-	private int userid;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int applicantid;
 	@Column(length=10)
 	private String phone;
 	@Temporal(TemporalType.DATE)
-	private Date dob;
+	private Calendar dob;
 	@Column(length=15)
 	private String gender;
 	@Column(length=15)
@@ -29,18 +35,24 @@ public class Applicants {
 	@Column(length=10)
 	private String panno;
 	
+	@OneToOne
+	@JoinColumn(name="userid")
+	private Users users;
+
 	//A no-arg constructor
 	public Applicants() {
 		super();
 	}
 
-	public int getUserid() {
-		return userid;
+	public int getApplicantid() {
+		return applicantid;
 	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
+
+	public void setApplicantid(int applicantid) {
+		this.applicantid = applicantid;
 	}
+
 
 	public String getPhone() {
 		return phone;
@@ -50,11 +62,11 @@ public class Applicants {
 		this.phone = phone;
 	}
 
-	public Date getDob() {
+	public Calendar getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(Calendar dob) {
 		this.dob = dob;
 	}
 
@@ -89,5 +101,15 @@ public class Applicants {
 	public void setPanno(String panno) {
 		this.panno = panno;
 	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	
+	
 	
 }
