@@ -119,7 +119,7 @@
                     .a{
                     width:100%;
                     background:none;
-                    border:4px solid #4caf50;
+                    border:3px solid #4caf50;
                    color:white;
                    
                     font-size: 20px;
@@ -127,6 +127,20 @@
                     padding:5px;
                     margin:12px;
                     }
+                    
+                      
+                    .b{
+                    width:50%;
+                    background:none;
+                    border:2px solid #4caf50;
+                   color:white;
+                   
+                    font-size: 18px;
+                
+                    padding:5px;
+                    margin:12px;
+                    }
+                    
                     
                .error{
               
@@ -143,9 +157,9 @@
 
 </head>
 <body>
-	<body background="d.jpg" width="500" height="100" >
+	<body background="assets/img/d.jpg" width="500" height="100" >
         
-        <form onsubmit="return validate()"  method="get" action="application.do">
+        <form onsubmit="return validate()" method="post" action="login.do">
             <div id="deco">
             <h1>Login</h1>
             <table>
@@ -164,9 +178,14 @@
                 <tr>
                     <td><h2><input type="submit" value="Sign in" class="a" ></h2></td>
        
-                    <td> <a href="a5.html"> <img src="0.jpg" height="80" width="80"> <center><font //color="white">Forget Password</font></center> </a></td>
+                    <td> <a href="a5.html"> <img src="assets/img/fp.jpg" height="80" width="80"> <center><font color="white">Forget Password</font></center> </a></td>
                 </tr>
                 
+                 <tr>
+                    <td><h3>Not Already Registered?</h3></td>
+       
+                    <td> <a href="register.do" class="b">  <center><font color="white">Sign-up</font></center> </a></td>
+                </tr>
                           
               </table>
             </div>

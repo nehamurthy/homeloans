@@ -1,5 +1,8 @@
 package homeloan.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -14,9 +17,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import homeloan.model.Applicants;
+import homeloan.model.Documents;
+import homeloan.model.IncomeSalaried;
+import homeloan.model.IncomeSelfEmployed;
+import homeloan.model.Loan;
+import homeloan.model.Property;
 import homeloan.model.Users;
 import homeloan.service.HomeLoanServiceIntf;
 
@@ -43,10 +53,10 @@ public class HomeLoanController {
 	 public ModelAndView registerUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") Users users) {
 			
 		//System.out.println(users.getFirstname());
-		long id =new Date().getTime();
+		//long id =new Date().getTime();
 		boolean flag = homeLoanServiceIntf.registerUser(users);
 		if(flag) {
-		    ModelAndView mav = new ModelAndView("applicationform");
+		    ModelAndView mav = new ModelAndView("login");
 		    mav.addObject("login", new Users());
 		    return mav;
 		    }
@@ -69,14 +79,23 @@ public class HomeLoanController {
 	}
 	
 	 @RequestMapping(value = "/login", method = RequestMethod.POST)
-	  public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,   @ModelAttribute Users user1) {
+	  public ModelAndView loginProcess(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
 		 
 	    ModelAndView mav = null;
-	    boolean flag=homeLoanServiceIntf.loginProcess(user1);
-	    System.out.println(flag);
-	    if (flag)
+	    String email = request.getParameter("email");
+	    String password = request.getParameter("pwd");
+	    Users user1 = new Users();
+	    user1.setEmail(email);
+	    user1.setPassword(password);
+	    Users u = homeLoanServiceIntf.loginProcess(user1);
+	    if(u != null) {
+	    int userid = u.getUserid();
+	   // System.out.println(flag);
+	    
+	    	session.setAttribute("userid", userid);
 	      mav = new ModelAndView("applicationform");
-	  else {
+	    }
+	    else {
 	      mav = new ModelAndView("login");
 	      mav.addObject("message", " Password is wrong!!");
 	    }
@@ -86,23 +105,28 @@ public class HomeLoanController {
 	/*
 	 * Method to access the application form page (i.e. rendering on the browser)
 	 */
-	@RequestMapping(value = "/application", method = RequestMethod.GET)
-	  public ModelAndView getApplicationFormPage(HttpSession session, @ModelAttribute("applicants") Applicants applicants) {
+	/*@RequestMapping(value = "/getapplication", method = RequestMethod.POST)
+	  public ModelAndView getApplicationFormPage(HttpSession session) {
+		
+		
 		session.setAttribute("userid", 47);
 		
 		ModelAndView mav = new ModelAndView("applicationform");
       mav.addObject("applicants", new Applicants());
       return mav;		
-	}
+	}*/
 	
 	
 	/*
 	 * Method to be executed after Personal Details form submission
 	 */
 	@RequestMapping(value = "/application", method = RequestMethod.POST)
-	 public ModelAndView addApplicationInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ParseException {
+	 public ModelAndView addApplicationInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam("file") MultipartFile files[]) throws ParseException {
 		Integer userid=(Integer)session.getAttribute("userid");
 		
+		/*
+		 * Store personal details
+		 */
 		System.out.println("Controller for application form called");
 		String phone = request.getParameter("phone");
 		String dob = request.getParameter("dob");
@@ -129,9 +153,133 @@ public class HomeLoanController {
 		user.setUserid(userid);
 		applicants.setUsers(user);
 		
-		boolean flag = homeLoanServiceIntf.addApplicationInfo(applicants);
-		if(flag) {
-		    ModelAndView mav = new ModelAndView("login");
+		/*
+		 * Store income details
+		 */
+		
+		IncomeSalaried incomeSalaried = new IncomeSalaried();
+		IncomeSelfEmployed incomeSelfEmployed = new IncomeSelfEmployed();
+		
+		String typeofemp = request.getParameter("typeofemp");
+		
+		
+		
+		if(typeofemp.equals("salaried")) {
+			
+			Integer retirementage = Integer.parseInt(request.getParameter("retire"));
+			String monthlysalary = request.getParameter("msal");
+			String otype = request.getParameter("otype");
+			incomeSalaried.setRetirementage(retirementage);
+			incomeSalaried.setMonthlysalary(monthlysalary);
+			incomeSalaried.setOrganization(otype);
+			user.setUserid(userid);
+			incomeSalaried.setUsers(user);
+		}
+		else if(typeofemp.equals("self-employed")) {
+			
+			String turnover = request.getParameter("turnover");
+			String natureofbusiness = request.getParameter("nob");
+			String vintage = request.getParameter("vintage");
+			incomeSelfEmployed.setTurnover(turnover);
+			incomeSelfEmployed.setNatureofbusiness(natureofbusiness);
+			incomeSelfEmployed.setBusinessvintage(vintage);
+			user.setUserid(userid);
+			incomeSelfEmployed.setUsers(user);
+		}
+		
+		/*
+		 * Store property details
+		 */
+		String isProp = request.getParameter("prop");
+		System.out.println("IsProp: "+isProp);
+		String propertylocation = request.getParameter("ploc");
+		String propertyname = request.getParameter("pname");
+		String amount = request.getParameter("eamt");
+		
+		Property property = new Property();
+		property.setPropertylocation(propertylocation);
+		property.setPropertyname(propertyname);
+		property.setAmount(amount);
+		
+		user.setUserid(userid);
+		property.setUsers(user);
+		
+		/*
+		 * Store loan details
+		 */
+		String loanamount = request.getParameter("lamt");
+		String tenure = request.getParameter("tenure");
+		String downpayment = request.getParameter("downpayment");
+		String downpayment_pct = request.getParameter("downpayment_pct");
+		
+		Loan loan = new Loan();
+		loan.setLoanamount(loanamount);
+		loan.setTenure(tenure);
+		loan.setDownpayment(downpayment);
+		loan.setDownpayment_pct(downpayment_pct);
+		user.setUserid(userid);
+		loan.setUsers(user);
+		
+		/*
+		 * Documents upload
+		 */
+		Documents documents = new Documents();
+		for (int i = 0; i < files.length; i++) {
+			String filename="";
+			if(i==0)
+				filename=userid+"idproof"+".pdf";
+				else if(i==1)
+					filename=userid+"ageproof"+".pdf";
+				else if(i==2)
+					filename=userid+"addressproof"+".pdf";
+				else if(i==3)
+					filename=userid+"incomeproof"+".pdf";
+				else if(i==4)
+					filename=userid+"propertyproof"+".pdf";
+			MultipartFile file = files[i];
+			try {
+				byte[] bytes = file.getBytes();
+
+				// Creating the directory to store file
+				String rootPath = System.getProperty("catalina.home");
+				File dir = new File(rootPath + File.separator + "tmpFiles");
+				if (!dir.exists())
+					dir.mkdirs();
+
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath()+ File.separator + filename);
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+				
+				if(i==0)
+					documents.setIdproof(filename);
+				else if(i==1)
+					documents.setAgeproof(filename);
+				else if(i==2)
+					documents.setAddressproof(filename);
+				else if(i==3)
+					documents.setIncomeproof(filename);
+				else if(i==4)
+					documents.setPropertyproof(filename);
+				//user.setStatus("N");
+				
+				System.out.println("Server File Location="+ serverFile.getAbsolutePath());
+				} catch (Exception e) {
+				System.out.println( "You failed to upload " + filename + " => " + e.getMessage());
+			}
+		}
+		user.setUserid(userid);
+		documents.setUsers(user);
+		
+		boolean flag1 = homeLoanServiceIntf.addApplicationInfo(applicants);
+		boolean flag2 = homeLoanServiceIntf.addIncomeSalariedInfo(incomeSalaried);
+		boolean flag3 = homeLoanServiceIntf.addIncomeSelfEmployedInfo(incomeSelfEmployed);
+		boolean flag4 = homeLoanServiceIntf.addPropertyInfo(property);
+		boolean flag5 = homeLoanServiceIntf.addLoanInfo(loan);
+		boolean flag6 = homeLoanServiceIntf.addDocuments(documents);
+		if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
+		    ModelAndView mav = new ModelAndView("welcomeuser");
 		    mav.addObject("login", new Users());
 		    return mav;
 		    }

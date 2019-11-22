@@ -173,28 +173,28 @@ function valid(){
 
 
 </head>
-<body background="d.jpg">
+<body background="assets/img/d.jpg">
 
 <div id="deco">
 <h1>REGISTRATION</h1>
-<form action="abc.jsp" onsubmit="return valid()">
+<form action="register.do" modelAttribute="user" method="post" onsubmit="return valid()">
 <table>
 
 <tr>
 <td><h2>FirstName:</h2></td>
-<td><input type='text' id='name' name='name'><br>
+<td><input type='text' id='name' name='firstname'><br>
 <div id='id1' class='error'></div></td>
 </tr>
 
 <tr>
 <td><h2>MiddleName:</h2> </td>
-<td><input type='text' id='name1' name='name'>
+<td><input type='text' id='name1' name='middlename'>
 <div id='id1a' class='error'></div></td>
 </tr>
 
 <tr>
 <td><h2>LastName:</h2> </td>
-<td><input type='text' id='name2' name='name'>
+<td><input type='text' id='name2' name='lastname'>
 <div id='id1b' class='error'></div></td>
 </tr>
 
@@ -210,7 +210,7 @@ function valid(){
 
 <tr>
 <td><h2> password:<h2></h2></td>
-<td><input type='password' id='pwd' name='pwd'>
+<td><input type='password' id='pwd' name='password'>
 <div id='id2' class='error'></div></td>
 </tr>
 

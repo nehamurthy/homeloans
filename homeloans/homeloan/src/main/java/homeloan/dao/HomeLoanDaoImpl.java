@@ -3,26 +3,32 @@ package homeloan.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
 import homeloan.model.Applicants;
+import homeloan.model.Documents;
+import homeloan.model.IncomeSalaried;
+import homeloan.model.IncomeSelfEmployed;
+import homeloan.model.Loan;
+import homeloan.model.Property;
 import homeloan.model.Users;
 
 @Repository("homeLoanDao")
 public class HomeLoanDaoImpl implements HomeLoanDaoIntf {
 
+	@PersistenceContext
+	EntityManager em;
+	
 	public boolean registerUser(Users users) {
 		
 		 boolean flag=false;
 		    try {
-			    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-				EntityManager em = emf.createEntityManager();
-				em.getTransaction().begin(); 
+			   
 				em.persist(users);
 				
-				em.getTransaction().commit();
-				em.close();
 				System.out.println("end");
 				flag=true;
 		    }
@@ -36,12 +42,9 @@ public class HomeLoanDaoImpl implements HomeLoanDaoIntf {
 		
 		boolean flag=false;
 	    try {
-		    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
-			EntityManager em = emf.createEntityManager();
-			em.getTransaction().begin(); 
+		    
 			em.persist(applicants);
-			em.getTransaction().commit();
-			em.close();
+			
 			System.out.println("Done");
 			flag=true;
 	    }
@@ -51,16 +54,122 @@ public class HomeLoanDaoImpl implements HomeLoanDaoIntf {
 	    return flag;
 	}
 
-	public boolean loginProcess(Users users) {
+	public Users loginProcess(Users users) {
 		
-		boolean result=false;
+		int flag = 0;
+		Users u = null;
+		 try {
+			   
+				String emailid =  users.getEmail();
+				String password = users.getPassword();
+				
+				u = (Users)em.createQuery("select u from Users u where  u.email=:emailid").setParameter("emailid", emailid).getSingleResult();
+				
+				if(( u.getEmail().equals(emailid) ) && ( u.getPassword().equals(password) ) ) {
+					
+					flag = 1;
+				}
+				else flag = 0;
+			
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		 if(flag == 1)
+		 	return u;
+		 else return null;
+		}
+
+	public boolean addIncomeSalariedInfo(IncomeSalaried incomeSalaried) {
+
+		 boolean flag=false;
+		    try {
+			   
+				em.persist(incomeSalaried);
+				
+				System.out.println("end");
+				flag=true;
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		    return flag;
+	}
+
+	public boolean addIncomeSelfEmployedInfo(IncomeSelfEmployed incomeSelfEmployed) {
+		 boolean flag=false;
+		    try {
+			   
+				em.persist(incomeSelfEmployed);
+				
+				System.out.println("end");
+				flag=true;
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		    return flag;
+	}
+
+	public boolean addPropertyInfo(Property property) {
+		 boolean flag=false;
+		    try {
+			   
+				em.persist(property);
+				
+				System.out.println("end");
+				flag=true;
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		    return flag;
+	}
+
+	public boolean addLoanInfo(Loan loan) {
+		 boolean flag=false;
+		    try {
+			   
+				em.persist(loan);
+				
+				System.out.println("end");
+				flag=true;
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		    return flag;
+	}
+
+	public boolean addDocuments(Documents documents) {
+		 boolean flag=false;
+		    try {
+			   
+				em.persist(documents);
+				
+				System.out.println("end");
+				flag=true;
+		    }
+		    catch(Exception e) { 
+		    	System.out.println("Error:"+e);
+		    }
+		    return flag;
+	}
+
+	
+	
+	/*public Users loginProcess(Users users) {
+		
+		//boolean result=false;
+		Users u = null;
 		try{
 		
 		//code for jpa
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 			EntityManager em = emf.createEntityManager();
 		
-		Users u=em.find(Users.class,users.getUserid());
+		u=em.find(Users.class,users.getUserid());
+		System.out.println(u.getUserid());
 		//System.out.println(result+"1");
 	
 		
@@ -80,8 +189,8 @@ public class HomeLoanDaoImpl implements HomeLoanDaoIntf {
 			System.out.println("error:"+e);
 		}
 		//System.out.println(result+"4");
-		return result;
-	}
+		return u;
+	}*/
 
 	
 }

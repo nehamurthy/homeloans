@@ -12,7 +12,7 @@
             margin: 0px;
             padding: 0px;
             width: 100%;
-            background-image: url("d.jpg");
+            background-image: url("assets/img/d.jpg");
             background-position: top;
             background-repeat: no-repeat;
             background-size: cover;
@@ -69,12 +69,13 @@
     h2, h4 {
     	margin-right: 97px;
     	margin-top: 50px;
+    	
     }
 
 </style>
 </head>
 <body>
-	<jsp:include page="homepage.html"></jsp:include>
+	<jsp:include page="includes/homepage.html"></jsp:include>
 	
 	<div class="main_banner">
     <div class="logo_new">
@@ -137,7 +138,7 @@
   <h2> Processing Fees:</h2></b> 
  <h3>Up to 0.50% of the loan amount or Rs. 3,000 whichever is higher, plus applicable taxes. </h3>
   
-      <jsp:include page="aside.html"></jsp:include>
+      <jsp:include page="includes/aside.html"></jsp:include>
     <br><br>
     <br><br>
    
@@ -145,7 +146,7 @@
     
     
     
-    <jsp:include page="footer.html"></jsp:include>
+    <jsp:include page="includes/footer.html"></jsp:include>
     
     
     

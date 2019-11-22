@@ -1,11 +1,21 @@
 package homeloan.dao;
 
 import homeloan.model.Applicants;
+import homeloan.model.Documents;
+import homeloan.model.IncomeSalaried;
+import homeloan.model.IncomeSelfEmployed;
+import homeloan.model.Loan;
+import homeloan.model.Property;
 import homeloan.model.Users;
 
 public interface HomeLoanDaoIntf {
 
 	public boolean registerUser(Users users);
 	public boolean addApplicationInfo(Applicants applicants);
-	public boolean loginProcess(Users users);
+	public Users loginProcess(Users users);
+	public boolean addIncomeSalariedInfo(IncomeSalaried incomeSalaried);
+	public boolean addIncomeSelfEmployedInfo(IncomeSelfEmployed incomeSelfEmployed);
+	public boolean addPropertyInfo(Property property);
+	public boolean addLoanInfo(Loan loan);
+	public boolean addDocuments(Documents documents);
 }

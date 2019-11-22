@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -35,7 +36,7 @@
     <section id="personaldetails" class="tab-panel">
       <h2>Personal Details</h2>
 		<div class="personaldetails_form">
-			<form action="application.do" modelAttribute="applicants" method="post">
+			<form action="application.do" modelAttribute="applicants" method="post"  enctype="multipart/form-data">
 				<table cellpadding=10>
 					<tr>
 						<td>Phone Number</td>
@@ -293,13 +294,31 @@
 	 <section id="uploaddocuments" class="tab-panel">
       <h2>Upload Documents</h2>
       <table cellpadding=10>
-				
-					
-					
-					<tr>
-						<td colspan="2" align="center"><input type="submit" value="Submit"></td>
-					</tr>
-				</table>
+      
+      	<tr>
+      		<td>ID Proof</td>
+      		<td><input type="file" name="file" id="idproof"></td>
+      	</tr>
+      	<tr>
+      		<td>Age Proof</td>
+      		<td><input type="file" name="file" id="ageproof"></td>
+      	</tr>
+      	<tr>
+      		<td>Address Proof</td>
+      		<td><input type="file" name="file" id="addressproof"></td>
+      	</tr>
+      	<tr>
+      		<td>Income Proof</td>
+      		<td><input type="file" name="file" id="incomeproof"></td>
+      	</tr>
+      	<tr>
+      		<td>Property Proof</td>
+      		<td><input type="file" name="file" id="propertyproof"></td>
+      	</tr>
+      	<tr>
+			<td colspan="2" align="center"><input type="submit" value="Submit"></td>
+		</tr>
+	</table>
 			</form>
       <!-- <p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
       <p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p> -->

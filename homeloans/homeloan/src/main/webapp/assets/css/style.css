@@ -52,13 +52,13 @@ td {
 
 .tabset > label:hover,
 .tabset > input:focus + label {
-  color: #06c;
+  color: #1abc9c;
 }
 
 .tabset > label:hover::after,
 .tabset > input:focus + label::after,
 .tabset > input:checked + label::after {
-  background: #06c;
+  background: #1abc9c;
 }
 
 .tabset > input:checked + label {
