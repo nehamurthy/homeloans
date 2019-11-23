@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import homeloan.model.Applicants;
+import homeloan.model.ApplicationStatus;
 import homeloan.model.Documents;
 import homeloan.model.IncomeSalaried;
 import homeloan.model.IncomeSelfEmployed;
@@ -154,6 +155,22 @@ public class HomeLoanDaoImpl implements HomeLoanDaoIntf {
 		    	System.out.println("Error:"+e);
 		    }
 		    return flag;
+	}
+
+	public boolean addApplicationStatus(ApplicationStatus applicationStatus) {
+		
+		boolean flag=false;
+	    try {
+		   
+			em.persist(applicationStatus);
+			
+			System.out.println("end");
+			flag=true;
+	    }
+	    catch(Exception e) { 
+	    	System.out.println("Error:"+e);
+	    }
+	    return flag;
 	}
 
 	

@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,6 +19,11 @@ public class ApplicationStatus {
 	@Temporal(TemporalType.DATE)
 	private Calendar appointmentdate;
 	private String status;
+	
+	@OneToOne
+	@JoinColumn(name="userid")
+	private Users users;
+	
 	public ApplicationStatus() {
 		super();
 	}
@@ -37,6 +44,12 @@ public class ApplicationStatus {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
 	}
 	
 	

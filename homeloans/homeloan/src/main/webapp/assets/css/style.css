@@ -98,7 +98,7 @@ body {
 	display: none;
 }
 
-input[type=button], input[type=submit], input[type=file] {
+input[type=button], input[type=submit] {
   background-color: #1abc9c; /* Green */
   border: none;
   color: white;
@@ -107,6 +107,17 @@ input[type=button], input[type=submit], input[type=file] {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.nan {
+  background-color: #1abc9c;
+  padding: 2px;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif
+}
+.a{
+  margin-right:20px; 
+
 }
 
 /* .error {

@@ -15,6 +15,15 @@
 
 </head>
 <body onload="initTab()">
+
+  <div class="a"><IMG STYLE="  float:right; " SRC="assets/img/signup.png" width="80px" height="80px"></div>
+
+        <div class="nan">
+            <h1 ><u><center>LTI Home Loans</h1></center></u>
+            <p ><i>Lending for Real Life</p></i>
+           
+        </div>
+
 	<div class="tabset">
   <!-- Tab 1 -->
   <input type="radio" name="tabset" id="tab1" aria-controls="personaldetails">
@@ -319,7 +328,7 @@
 			<td colspan="2" align="center"><input type="submit" value="Submit"></td>
 		</tr>
 	</table>
-			</form>
+	</form>
       <!-- <p><strong>Overall Impression:</strong> A dark, strong, malty German lager beer that emphasizes the malty-rich and somewhat toasty qualities of continental malts without being sweet in the finish.</p>
       <p><strong>History:</strong> Originated in the Northern German city of Einbeck, which was a brewing center and popular exporter in the days of the Hanseatic League (14th to 17th century). Recreated in Munich starting in the 17th century. The name “bock” is based on a corruption of the name “Einbeck” in the Bavarian dialect, and was thus only used after the beer came to Munich. “Bock” also means “Ram” in German, and is often used in logos and advertisements.</p> -->
     </section>

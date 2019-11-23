@@ -164,7 +164,16 @@ h2, h1 {
                     display: block;
                     
             }
+	.nan {
+  background-color: #1abc9c;
+  padding: 2px;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif
+}
+.a{
+  margin-right:20px; 
 
+}
 
 </style>
 
@@ -172,11 +181,21 @@ h2, h1 {
 </head>
 <body>
 
+
+  <div class="a"><IMG STYLE="float:right;" SRC="assets/img/signup.png" width="80px" height="80px"></div>
+
+        <div class="nan">
+        
+            <h1 ><u><center>LTI Home Loans</h1></center></u>
+            <p><i>Lending for Real Life</i></p>
+           
+      	 </div>
+
 <!-- <div id="deco"> -->
 <center>
 <h1>REGISTRATION</h1>
 <form action="register.do" modelAttribute="user" method="post" onsubmit="return validRegister()">
-<table border=0 cellpadding=6>
+<table border=0 cellpadding=2>
 
 <tr>
 <td><h2>First Name</h2></td>

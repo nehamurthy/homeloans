@@ -94,7 +94,7 @@
                     #deco {
                     width:10px;
                     position:absolute;
-                    top:15%;
+                    top:50%;
                     left:40%;
                     transform:transalate(-50%,50%);
                     color:black;
@@ -157,15 +157,32 @@
             	text-align: center;
             	margin-top: 10px;
             } 
-           
+            
+            .nan {
+  background-color: #1abc9c;
+  padding: 2px;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif
+}
+.a{
+  margin-right:20px; 
+
+}
+  
         </style>
 
 
 </head>
 <body>
-	<body>
+	  <div class="a"><img style="float: right;" src="assets/img/signup.png" width="80px" height="80px"></div>
+
+        <div class="nan">
+            <h1 ><u><center>LTI Home Loans</h1></center></u>
+            <p ><i>Lending for Real Life</p></i>
+           
+        </div><br><br><br><br>
         <form onsubmit="return validate()" method="post" action="login.do">
-        	<div class="error_login">${message}</div>
+        	
             <div id="deco">
             <h1>Login</h1>
             <table>
@@ -195,11 +212,12 @@
                           
               </table>
             </div>
+            
         </form>
         
       
-          
+          <div class="error_login">${message}</div>
                 
-    </body>
+    
 </body>
 </html>

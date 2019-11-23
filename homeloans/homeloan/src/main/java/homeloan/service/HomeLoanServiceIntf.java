@@ -1,6 +1,7 @@
 package homeloan.service;
 
 import homeloan.model.Applicants;
+import homeloan.model.ApplicationStatus;
 import homeloan.model.Documents;
 import homeloan.model.IncomeSalaried;
 import homeloan.model.IncomeSelfEmployed;
@@ -18,4 +19,5 @@ public interface HomeLoanServiceIntf {
 	public boolean addPropertyInfo(Property property);
 	public boolean addLoanInfo(Loan loan);
 	public boolean addDocuments(Documents documents);
+	public boolean addApplicationStatus(ApplicationStatus applicationStatus);
 }

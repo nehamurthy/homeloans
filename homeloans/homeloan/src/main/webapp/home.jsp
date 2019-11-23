@@ -9,7 +9,7 @@
 <!-- <link rel="stylesheet" href="assets/css/home.css"> -->
 <style>
 
-	.main_banner {
+	/* .main_banner {
             margin: 0px;
             padding: 0px;
             width: 100%;
@@ -48,35 +48,84 @@
         background: -ms-linear-gradient(top, rgba(225, 0, 26, 1) 0%, rgba(225, 0, 26, 1) 70%, rgba(137, 6, 28, 1) 96%, rgba(137, 6, 28, 1) 100%);
         background: linear-gradient(to bottom, rgba(225, 0, 26, 1) 0%, rgba(225, 0, 26, 1) 70%, rgba(137, 6, 28, 1) 96%, rgba(137, 6, 28, 1) 100%);
         filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e1001a', endColorstr='#89061c', GradientType=0);
-        */ font-size: 1.7em;
-        vertical-align: middle;
-        color: white;
-        padding: 23px;
-        border-radius: 10px;
-        box-shadow: -1px 2px 11px #2c2727;
-        letter-spacing: 0.5px;
-        font-weight: 800;
-    }
-    
-    .rwd-table tr td{
-    
-    text-align: center;
-    }
-    
-    a {
-    	text-decoration: none;
-    }
-    
-    h2, h4 {
-    	margin-right: 97px;
-    	margin-top: 50px;
-    	
-    }
+        */
+        
+        ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #1abc9c;
+}
+.nan {
+  background-color: #1abc9c;
+  padding: 2px;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif
+}
+.a{
+  margin-right:20px; 
+
+}
+table, th, td {
+  border: 1px solid black;
+  text-align: center;
+  
+}
+th {
+  background-color :#1abc9c;
+  color:black;
+}
+
+tr:nth-child(odd){background-color: #85eed9}
+
+table {
+  border-collapse: collapse;
+  width: 50%;
+  height: 50%;
+  margin-left: 10px;
+}
+
+th {
+  height: 50px;
+}
+.footer {
+  background-color:#1abc9c;
+  padding: 10px;
+  text-align: right;
+}
+.main_banner {
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            background-image: url("assets/img/d.jpg");
+            background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 417px;
+        }
+        
 
 </style>
 </head>
 <body>
-	<jsp:include page="includes/homepage.html"></jsp:include>
+	<%-- <jsp:include page="includes/homepage.html"></jsp:include>
 	
 	<div class="main_banner">
     <div class="logo_new">
@@ -150,7 +199,65 @@
     <jsp:include page="includes/footer.html"></jsp:include>
     
     
-    
+     --%>
+     
+      <div class="a"><IMG STYLE="  float:right; " SRC="assets/img/signup.png" width="80px" height="80px"></div>
+
+        <div class="nan">
+            <h1 ><u><center>LTI Home Loans</h1></center></u>
+            <p ><i>Lending for Real Life</p></i>
+           
+        </div>
+<ul>
+  <li><a class="active" href="home.jsp">Home</a></li>
+  <li><a href="includes/AboutUs.html">About Us</a></li>
+  <li><a href="calculator.jsp">Calculator</a></li>
+  <li><a href="login.do">Apply Now</a></li>
+  <li><a href="register.do">Registration</a></li>
+  <li><a href="login.do">Login</a></li>
+  <li><a href="includes/faq1.html">FAQ</a></li>
+</ul>
+
+<div class="main_banner"></div>
+<br><br>
+
+<table>
+  <tr>
+    <th>Home Loan Schemes</th>
+    <th>Interest Rate For Women</th>
+    <th>Interest Rate For Others</th>
+  </tr>
+  <tr>
+    <td>Home Loan</td>
+    <td>8.25%-9.75%</td>
+    <td>8.40%-9.80%</td>
+  </tr>
+  <tr>
+    <td>Plot Loan</td>
+    <td>8.55%-9.95%</td>
+    <td>8.60%-10.00%</td>
+  </tr>
+  <tr>
+    <td>Home Improvement Loan</td>
+    <td>8.25%-9.75%</td>
+    <td>8.40%-9.80%</td>
+  </tr>
+  <tr>
+    <td>Top Up Loan</td>
+    <td>8.30% onwards</td>
+    <td>8.30% onwards</td>
+  </tr>
+</table>
+
+<br><br><br><br><br><br><br><br>
+<div class="footer">
+        <p>Contact us: 022-2452656<br>
+            Location:Mahape,Navi Mumbai<br>
+            Email-Id:sendquery@lntinfotech.com<br>
+
+
+        </p>
+      </div>
 
 </body>
 

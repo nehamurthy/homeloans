@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import homeloan.dao.HomeLoanDaoIntf;
 import homeloan.model.Applicants;
+import homeloan.model.ApplicationStatus;
 import homeloan.model.Documents;
 import homeloan.model.IncomeSalaried;
 import homeloan.model.IncomeSelfEmployed;
@@ -61,6 +62,11 @@ public class HomeLoanServiceImpl implements HomeLoanServiceIntf {
 	@Transactional
 	public boolean addDocuments(Documents documents) {
 		return homeLoanDaoIntf.addDocuments(documents);
+	}
+
+	@Transactional
+	public boolean addApplicationStatus(ApplicationStatus applicationStatus) {
+		return homeLoanDaoIntf.addApplicationStatus(applicationStatus);
 	}
 	
 	

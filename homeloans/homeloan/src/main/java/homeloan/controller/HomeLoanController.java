@@ -3,6 +3,7 @@ package homeloan.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import homeloan.model.Applicants;
+import homeloan.model.ApplicationStatus;
 import homeloan.model.Documents;
 import homeloan.model.IncomeSalaried;
 import homeloan.model.IncomeSelfEmployed;
@@ -91,8 +93,11 @@ public class HomeLoanController {
 	    if(u != null) {
 	    int userid = u.getUserid();
 	   // System.out.println(flag);
-	    
+	    String firstname = u.getFirstname().toUpperCase();
+	    String lastname = u.getLastname().toUpperCase();
 	    	session.setAttribute("userid", userid);
+	    	session.setAttribute("firstname", firstname);
+	    	session.setAttribute("lastname", lastname);
 	      mav = new ModelAndView("applicationform");
 	    }
 	    else {
@@ -123,6 +128,8 @@ public class HomeLoanController {
 	@RequestMapping(value = "/application", method = RequestMethod.POST)
 	 public ModelAndView addApplicationInfo(HttpServletRequest request, HttpServletResponse response, HttpSession session, @RequestParam("file") MultipartFile files[]) throws ParseException {
 		Integer userid=(Integer)session.getAttribute("userid");
+		String firstname = (String)session.getAttribute("firstname");
+		String lastname = (String)session.getAttribute("lastname");
 		
 		/*
 		 * Store personal details
@@ -272,19 +279,44 @@ public class HomeLoanController {
 		user.setUserid(userid);
 		documents.setUsers(user);
 		
+		/*
+		 * Generate Application ID
+		 */
+		String lastTwoChars = firstname.substring(firstname.length() - 2);
+		String firstTwoChars = lastname.substring(0, 2);
+		String applicationid = lastTwoChars + userid + firstTwoChars;
+		
+		int noOfDays = 14; 
+	     Calendar cal1 = Calendar.getInstance();
+	     Date cdate = cal1.getTime();
+	     cal1.add(Calendar.DAY_OF_YEAR, noOfDays);
+	     
+	     ApplicationStatus applicationStatus = new ApplicationStatus();
+	     applicationStatus.setApplicationid(applicationid);
+	     applicationStatus.setAppointmentdate(cal1);
+	     applicationStatus.setStatus("NV");
+	     
+	     user.setUserid(userid);
+	     applicationStatus.setUsers(user); 
+		
+		
 		boolean flag1 = homeLoanServiceIntf.addApplicationInfo(applicants);
 		boolean flag2 = homeLoanServiceIntf.addIncomeSalariedInfo(incomeSalaried);
 		boolean flag3 = homeLoanServiceIntf.addIncomeSelfEmployedInfo(incomeSelfEmployed);
 		boolean flag4 = homeLoanServiceIntf.addPropertyInfo(property);
 		boolean flag5 = homeLoanServiceIntf.addLoanInfo(loan);
 		boolean flag6 = homeLoanServiceIntf.addDocuments(documents);
-		if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6) {
+		boolean flag7 = homeLoanServiceIntf.addApplicationStatus(applicationStatus);
+		
+		if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7) {
 		    ModelAndView mav = new ModelAndView("welcomeuser");
-		    mav.addObject("login", new Users());
+		    mav.addObject("applicationid", applicationid);
+		   // mav.addObject("login", new Users());
 		    return mav;
 		    }
 		    else {
 		    	ModelAndView mav = new ModelAndView("applicationform");
+		    	
 		        mav.addObject("user", new Users());
 		        //mav.addObject("status","Sorry! Registration in incomplete");
 		        return mav;	
