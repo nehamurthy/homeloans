@@ -44,7 +44,7 @@ function displayFields() {
 }
 
 function validatePersonal() {
-	alert('hi');
+	//alert('hi');
 	/*
 	 * Phone number validations
 	 */
@@ -116,13 +116,13 @@ function validatePersonal() {
 	//var aadhar_regex = /^[0-9]{12}$/;
 	var aadharno = document.getElementById("aadharno").value;
 	document.getElementById("error_aadhar").innerHTML = "";
-	alert(aadharno);
+	//alert(aadharno);
 	if(aadharno == "") {
 		
 		document.getElementById("error_aadhar").innerHTML = "! Please fill out this field";
 		document.getElementById("error_aadhar").style.cssText = "color: red; font-size: 13px; font-family: arial";
 		flag = 1;
-		alert('aaa');
+		//alert('aaa');
 	}
 	
 	else if(aadharno.length < 12) {
@@ -130,7 +130,7 @@ function validatePersonal() {
 		document.getElementById("error_aadhar").innerHTML = "! Please enter your 12-digit Aadhar Number";
 		document.getElementById("error_aadhar").style.cssText = "color: red; font-size: 13px; font-family: arial";
 		flag = 1;
-		alert('kkkk');
+		//alert('kkkk');
 	}
 	
 	//var pan_regex = "/^[A-Z]{5}+{0-9}{4}+[A-Z]{1}$/";
@@ -150,7 +150,7 @@ function validatePersonal() {
 		document.getElementById("error_pan").style.cssText = "color: red; font-size: 13px; font-family: arial";
 		flag = 1;
 	}*/
-	alert(flag);
+	//alert(flag);
 	if(flag===1)
 		return false;
 	else {

@@ -97,7 +97,7 @@ public class HomeLoanController {
 	    }
 	    else {
 	      mav = new ModelAndView("login");
-	      mav.addObject("message", " Password is wrong!!");
+	      mav.addObject("message", "Invalid username or password. Sign Up if not yet registered.");
 	    }
 	    return mav;
 	  }

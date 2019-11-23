@@ -23,7 +23,7 @@ public class Users {
 	private String middlename;
 	@Column(length=30)
 	private String lastname;
-	@Column(length=50)
+	@Column(length=50, unique=true)
 	private String email;
 	@Column(length=15)
 	private String password;

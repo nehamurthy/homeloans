@@ -36,7 +36,7 @@
     <section id="personaldetails" class="tab-panel">
       <h2>Personal Details</h2>
 		<div class="personaldetails_form">
-			<form action="application.do" modelAttribute="applicants" method="post"  enctype="multipart/form-data">
+			<form action="application.do" modelAttribute="applicants" method="post" enctype="multipart/form-data">
 				<table cellpadding=10>
 					<tr>
 						<td>Phone Number</td>

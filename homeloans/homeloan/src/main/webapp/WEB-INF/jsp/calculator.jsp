@@ -120,7 +120,7 @@
                 </div> 
 
                     <tr>
-                            <th>Rate Of Ineterest</th>
+                            <th>Rate Of Interest</th>
                             <td><input type="text" name="roi" id="roi" value="8.5" readonly="readonly">
                                 <div id="id2"></div></td>
                             </tr>
@@ -163,13 +163,13 @@
                         
                         <tr>
                         <th>Tenure</th>
-                        <td><input type="text" name="tenure" id="tenure"> <div id="id4"></div></td></td>
+                        <td><input type="text" name="tenure" id="tenure" placeholder="Loan period in months"> <div id="id4"></div></td></td>
                         </tr>
                         
                         
 
                         <tr>
-                        <th>Rate Of Ineterest</th>
+                        <th>Rate Of Interest</th>
                         <td><input type=""  name="roi" id="roi1" value="8.5" readonly="readonly"> <div id="id5"></div></td></td>
                         </tr>
                         

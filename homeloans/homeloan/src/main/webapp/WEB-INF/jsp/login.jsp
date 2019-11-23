@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,10 +7,7 @@
 <title>Login</title>
 
 <script type="text/javascript">
-     
-   
-     
-    
+ 
      
      function validate(){
     		
@@ -97,10 +94,10 @@
                     #deco {
                     width:10px;
                     position:absolute;
-                    top:25%;
+                    top:15%;
                     left:40%;
                     transform:transalate(-50%,50%);
-                    color:white;
+                    color:black;
                 
                     
                     }
@@ -112,7 +109,7 @@
                     border-bottom: 6px solid #4caf50;
                     margin-bottom:30px;
                     padding:0px; 
-                    color:white;
+                    color:black;
                    
                     }
                     
@@ -120,7 +117,7 @@
                     width:100%;
                     background:none;
                     border:3px solid #4caf50;
-                   color:white;
+                   color:black;
                    
                     font-size: 20px;
                 
@@ -133,7 +130,7 @@
                     width:50%;
                     background:none;
                     border:2px solid #4caf50;
-                   color:white;
+                   color:black;
                    
                     font-size: 18px;
                 
@@ -150,16 +147,25 @@
                     font-size: 18px;
                }
                
-             
+            .error_login {
+            	
+            	background-color: #1abc9c;
+            	height: 35px;
+            	text-color: white;
+            	font-size: 20px;
+            	font-weight: 500;
+            	text-align: center;
+            	margin-top: 10px;
+            } 
            
         </style>
 
 
 </head>
 <body>
-	<body background="assets/img/d.jpg" width="500" height="100" >
-        
+	<body>
         <form onsubmit="return validate()" method="post" action="login.do">
+        	<div class="error_login">${message}</div>
             <div id="deco">
             <h1>Login</h1>
             <table>
@@ -184,7 +190,7 @@
                  <tr>
                     <td><h3>Not Already Registered?</h3></td>
        
-                    <td> <a href="register.do" class="b">  <center><font color="white">Sign-up</font></center> </a></td>
+                    <td> <a href="register.do" class="b">  <center><font color="black">Sign Up</font></center> </a></td>
                 </tr>
                           
               </table>
